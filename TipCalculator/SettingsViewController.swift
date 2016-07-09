@@ -10,10 +10,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var defaulTipController: UISegmentedControl!
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        defaulTipController.selectedSegmentIndex = defaults.integerForKey("default_tip_percentage")
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +24,10 @@ class SettingsViewController: UIViewController {
     }
     
 
+    @IBAction func onDefaultTipChanged(sender: AnyObject) {
+        defaults.setInteger(defaulTipController.selectedSegmentIndex, forKey: "default_tip_percentage")
+        defaults.synchronize()
+    }
     /*
     // MARK: - Navigation
 
